@@ -1,0 +1,72 @@
+﻿@model MvcHotel.Models.Admin
+
+@{
+    ViewBag.Title = "管理员信息";
+    Layout = "~/Views/Shared/AdminMenu/_Layout.cshtml";
+}
+
+<h2 style="margin-bottom:30px;">@ViewBag.Title</h2>
+<div class="col-md-6">
+    <div id="refTable" class="col-md-12">
+        <div class="admin-left-my-info">
+            <div class="admin-portrait-img">
+                <img src="@Html.DisplayFor(model => model.Apic)" alt="头像" class="img-responsive">
+            </div>
+            <div class="admin-my-info-detail">
+                <h3>管理员</h3>
+                <section>
+                    <label><i class="fas fa-user"></i>@Html.DisplayNameFor(model => model.Aname)：</label>
+                    <div>@Html.DisplayFor(model => model.Aname)</div>
+                </section>
+                <section>
+                    <label><i class="fas fa-phone"></i>@Html.DisplayNameFor(model => model.Atel)：</label>
+                    <div>@Html.DisplayFor(model => model.Atel)</div>
+                </section>
+                <section>
+                    <label><i class="fas fa-lock"></i>@Html.DisplayNameFor(model => model.Aid)：</label>
+                    <div id="my-id">@Html.DisplayFor(model => model.Aid)</div>
+                </section>
+                <button id="edit-my-info" class="btn btn-default btm-btn">编辑</button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="col-md-12" style="margin-top:50px;">
+        <div class="admin-add-wrap">
+            <div>
+                <i class="fas fa-plus" id="add-admin"></i>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+@{ 
+    Html.RenderAction("_Adminlist","Admin");
+}
+
+<script>
+    $(document).ready(function () {
+        let aid=$("#my-id").html();
+        $("#edit-my-info").on("click", function() {
+            $.ajax({
+                url: "@Url.Action("_Editpart", "Admin", new { id = Model.Aid })",
+                type: "GET",
+                data: { id: aid }
+            })
+            .done(function(partialViewResult) {
+                $("#refTable").html(partialViewResult);
+            });
+        });
+        $("#add-admin").on("click", function() {
+            $.ajax({
+                url: "@Url.Action("_AddAdmin", "Admin")",
+                type: "GET",
+                data: {}
+            })
+            .done(function(partialViewResult) {
+                $(".admin-add-wrap").html(partialViewResult);
+            });
+        });
+    });
+</script>

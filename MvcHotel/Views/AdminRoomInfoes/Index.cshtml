@@ -1,0 +1,174 @@
+﻿@*@model IEnumerable<MvcHotel.Models.RoomInfo>*@
+@model PagedList.IPagedList<MvcHotel.Models.RoomInfo>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "房型管理";
+    Layout = "~/Views/Shared/AdminMenu/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="admin-search-box row">
+    @using (Html.BeginForm())
+    {<div class="col-sm-2">
+            <button class="btn">@Html.ActionLink("新增房型", "Create")</button>
+        </div>
+        <div class="col-sm-2">
+            <button class="btn" type="submit">所有房型</button>
+        </div>
+        <div class="col-sm-4 rtype-filter">
+            <label>房型筛选：</label>
+            @Html.DropDownList("Rtype", null, "--请选择--", htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="search-box-input col-sm-4">
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "" })
+            <input class="admin-search-box-btn" type="submit" value="Search" width="50" />
+        </div>
+    }
+</div>
+@using (Html.BeginForm("MultDelete", "AdminRoomInfoes"))
+{
+    <table class="tb admin-table" cellspacing="0">
+        <thead>
+            <tr>
+                <th>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="selectAll" /><i class="replace"></i>
+                    </label>
+                    <input type="submit" value="多选删除" class="btn" onclick="return confirm('确定要删除吗?')" />
+                </th>
+                <th>
+                    房间类型
+                </th>
+                <th>
+                    楼层
+                </th>
+                <th>
+                    可住人数
+                </th>
+                <th>
+                    是否有窗
+                </th>
+                <th>
+                    价格
+                </th>
+                <th>
+                    是否可退
+                </th>
+                <th>
+                    图片
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="checkitem" value="@item.RtypeID"><i class="replace"></i>
+                    </label>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rtype)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rfloor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rlive)
+                </td>
+                <td>
+                    @Html.DisplayTextFor(modelItem => item.Rwindow)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rcost)
+                </td>
+                <td>
+                    @Html.DisplayTextFor(modelItem => item.Rreservation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rpic)
+                </td>
+                <td>
+                    @Html.ActionLink("编辑", "Edit", new { id = item.RtypeID }, new { @class = "far fa-edit" }) |
+                    @*@Html.ActionLink("详情", "Details", new { id = item.Bid }, new { @class = "far fa-trash-alt" }) |*@
+                    @Html.ActionLink("删除", "Delete", new { id = item.RtypeID }, new { onclick = "return confirm('确定删除吗？')", @class = "far fa-trash-alt" })
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    @*<table class="table">
+        <tr>
+            <th>
+                <input type="checkbox" id="selectAll" />
+                <input type="submit" value="多选删除" class="btn" onclick="return confirm('确定要删除吗?')" />
+            </th>
+            <th>
+                房间类型
+            </th>
+            <th>
+                楼层
+            </th>
+            <th>
+                可住人数
+            </th>
+            <th>
+                是否有窗
+            </th>
+            <th>
+                价格
+            </th>
+            <th>
+                是否可退
+            </th>
+            <th>
+                图片
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.CheckBox("checkitem", new { value = item.RtypeID })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rtype)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rfloor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rlive)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rwindow)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rcost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rreservation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rpic)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.RtypeID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.RtypeID }) |
+                    @Html.ActionLink("删除", "Delete", new { id = item.RtypeID }, new { onclick = "return confirm('确定删除吗？')" })
+                </td>
+            </tr>
+        }
+
+    </table>*@
+}
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+                                                                            new { page, currentFilter = ViewBag.CurrentFilter }))
+    

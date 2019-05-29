@@ -1,0 +1,79 @@
+﻿@model MvcHotel.Models.Admin
+<div class="mask"></div>
+<div class="popup-form">
+    <div class="btn-close-wrap">
+        <div class="btn-close fas fa-times"></div>
+    </div>
+    <div class="table-content">
+        <div id="login">
+            <h1>登录</h1>
+            @using (Html.BeginForm("Login", "Admin", FormMethod.Post))
+    {
+        @*@Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)*@
+        <div class="field-wrap">
+            <label>
+                用户名<span class="req">*</span>
+            </label>
+            @Html.TextBoxFor(a => a.Aid)
+            @Html.ValidationMessageFor(model => model.Aid, "", new { @class = "text-danger" })
+            @*<input type="text" name="txtUsername" required autocomplete="off" />*@
+        </div>
+        <div class="field-wrap">
+            <label>
+                密码<span class="req">*</span>
+            </label>
+            @Html.PasswordFor(a => a.Apwd)
+            @Html.ValidationMessageFor(model => model.Apwd, "", new { @class = "text-danger" })
+            @*<input type="password" name="txtPwd" required autocomplete="off" />*@
+        </div>
+        <p class="forgot"><a href="#">忘记密码？</a></p>
+        <button class="button button-block btnLogin" type="submit">确认</button>
+}
+        </div>
+    </div>
+    <!-- tab-content -->
+</div>
+<!-- /form -->
+<script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
+<script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
+<script src="~/Scripts/popup.js"></script>
+<script>
+    // just for the demos, avoids form submit
+    jQuery.validator.setDefaults({
+        debug: true,
+        success: "valid"
+    });
+    $("#myform").validate({
+        rules: {
+            regPwd: "required",
+            regPwdAgain: {
+                equalTo: "#regPwd"
+            }
+        }
+    });
+</script>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $(".mask").height(document.documentElement.clientHeight * 2);
+        $(".login-btn").click(function () {
+            if ($(".mask").css("display") == "none") {
+                $(".mask").fadeIn(100);
+                $(".popup-form").slideDown(200);
+                $("body").css("overflow", "hidden");
+            }
+        });
+        $(".btn-close").on("click", function () {
+            $(".mask").fadeOut(100);
+            $(".popup-form").slideUp(100);
+            $("body").css("overflow", "scroll");
+        });
+
+        $(".mask").on("click", function () {
+            $(".mask").fadeOut(100);
+            $(".popup-form").slideUp(100);
+            $("body").css("overflow", "scroll");
+        });
+    });
+
+</script>

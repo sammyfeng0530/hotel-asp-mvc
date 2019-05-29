@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="JustHotelPluscModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="Aid" />
+    </Key>
+    <Property Name="Aid" Type="nchar" MaxLength="18" Nullable="false" />
+    <Property Name="Apwd" Type="nchar" MaxLength="18" Nullable="false" />
+    <Property Name="Aname" Type="nchar" MaxLength="20" />
+    <Property Name="Atel" Type="nchar" MaxLength="11" />
+    <Property Name="Apic" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="Bid" />
+    </Key>
+    <Property Name="CheckinTime" Type="datetime" Nullable="false" />
+    <Property Name="Ctel" Type="varchar" MaxLength="11" Nullable="false" />
+    <Property Name="CheckoutTime" Type="datetime" Nullable="false" />
+    <Property Name="Bid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RtypeID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CheckIn">
+    <Key>
+      <PropertyRef Name="CheID" />
+    </Key>
+    <Property Name="Gid" Type="char" MaxLength="18" Nullable="false" />
+    <Property Name="Rno" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="CheckinTime" Type="datetime" Nullable="false" />
+    <Property Name="CheckoutTime" Type="datetime" Nullable="false" />
+    <Property Name="Cash" Type="money" Nullable="false" />
+    <Property Name="CheID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Ctel" />
+    </Key>
+    <Property Name="Cname" Type="char" MaxLength="20" Nullable="false" />
+    <Property Name="Csex" Type="bit" />
+    <Property Name="Ctel" Type="varchar" MaxLength="11" Nullable="false" />
+    <Property Name="Cpwd" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Cpic" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Guest">
+    <Key>
+      <PropertyRef Name="Gid" />
+    </Key>
+    <Property Name="Gname" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="Gsex" Type="bit" />
+    <Property Name="Gid" Type="char" MaxLength="18" Nullable="false" />
+    <Property Name="Gtel" Type="char" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RoomInfo">
+    <Key>
+      <PropertyRef Name="RtypeID" />
+    </Key>
+    <Property Name="Rtype" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Rfloor" Type="int" />
+    <Property Name="Rlive" Type="int" />
+    <Property Name="Rwindow" Type="bit" />
+    <Property Name="Rcost" Type="money" />
+    <Property Name="Rreservation" Type="bit" />
+    <Property Name="Rpic" Type="nvarchar(max)" />
+    <Property Name="RtypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RoomNum">
+    <Key>
+      <PropertyRef Name="Rno" />
+    </Key>
+    <Property Name="Rno" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="RtypeID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <!--生成过程中发现错误:
+警告 6002: 表/视图“JustHotelPlusc.dbo.BookView”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <EntityType Name="BookView">
+    <Key>
+      <PropertyRef Name="Cname" />
+      <PropertyRef Name="Ctel" />
+      <PropertyRef Name="CheckinTime" />
+      <PropertyRef Name="CheckoutTime" />
+      <PropertyRef Name="Rtype" />
+    </Key>
+    <Property Name="Cname" Type="char" MaxLength="20" Nullable="false" />
+    <Property Name="Ctel" Type="char" MaxLength="11" Nullable="false" />
+    <Property Name="CheckinTime" Type="datetime" Nullable="false" />
+    <Property Name="CheckoutTime" Type="datetime" Nullable="false" />
+    <Property Name="Rtype" Type="nchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <!--生成过程中发现错误:
+警告 6002: 表/视图“JustHotelPlusc.dbo.CheckInView”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <EntityType Name="CheckInView">
+    <Key>
+      <PropertyRef Name="Gid" />
+      <PropertyRef Name="Gname" />
+      <PropertyRef Name="Gtel" />
+      <PropertyRef Name="Rno" />
+      <PropertyRef Name="CheckinTime" />
+      <PropertyRef Name="CheckoutTime" />
+      <PropertyRef Name="Cash" />
+    </Key>
+    <Property Name="Gid" Type="char" MaxLength="18" Nullable="false" />
+    <Property Name="Gname" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="Gtel" Type="char" MaxLength="15" Nullable="false" />
+    <Property Name="Rno" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="CheckinTime" Type="datetime" Nullable="false" />
+    <Property Name="CheckoutTime" Type="datetime" Nullable="false" />
+    <Property Name="Cash" Type="money" Nullable="false" />
+  </EntityType>
+  <!--生成过程中发现错误:
+警告 6002: 表/视图“JustHotelPlusc.dbo.CustmerInfo”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <EntityType Name="CustmerInfo">
+    <Key>
+      <PropertyRef Name="Cname" />
+      <PropertyRef Name="Ctel" />
+    </Key>
+    <Property Name="Cname" Type="char" MaxLength="20" Nullable="false" />
+    <Property Name="Csex" Type="bit" />
+    <Property Name="Ctel" Type="char" MaxLength="11" Nullable="false" />
+    <Property Name="Cpic" Type="nvarchar(max)" />
+  </EntityType>
+  <!--生成过程中发现错误:
+警告 6002: 表/视图“JustHotelPlusc.dbo.GuestInfo”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <EntityType Name="GuestInfo">
+    <Key>
+      <PropertyRef Name="Gname" />
+      <PropertyRef Name="Gid" />
+      <PropertyRef Name="Gtel" />
+    </Key>
+    <Property Name="Gname" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="Gsex" Type="bit" />
+    <Property Name="Gid" Type="char" MaxLength="17" Nullable="false" />
+    <Property Name="Gtel" Type="char" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <!--生成过程中发现错误:
+警告 6002: 表/视图“JustHotelPlusc.dbo.RoomInfoView”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <EntityType Name="RoomInfoView">
+    <Key>
+      <PropertyRef Name="Rno" />
+      <PropertyRef Name="Rtype" />
+    </Key>
+    <Property Name="Rno" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="Rtype" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Rfloor" Type="int" />
+    <Property Name="Rlive" Type="int" />
+    <Property Name="Rwindow" Type="bit" />
+    <Property Name="Rcost" Type="money" />
+    <Property Name="Rreservation" Type="bit" />
+  </EntityType>
+  <!--生成过程中发现错误:
+警告 6002: 表/视图“JustHotelPlusc.dbo.RoomTypeInfo”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <EntityType Name="RoomTypeInfo">
+    <Key>
+      <PropertyRef Name="Rtype" />
+      <PropertyRef Name="RtypeID" />
+    </Key>
+    <Property Name="Rtype" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Rfloor" Type="int" />
+    <Property Name="Rlive" Type="int" />
+    <Property Name="Rwindow" Type="bit" />
+    <Property Name="Rcost" Type="money" />
+    <Property Name="Rreservation" Type="bit" />
+    <Property Name="Rpic" Type="nvarchar(max)" />
+    <Property Name="RtypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Book_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Ctel" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="Ctel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Book_RoomInfo">
+    <End Role="RoomInfo" Type="Self.RoomInfo" Multiplicity="1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RoomInfo">
+        <PropertyRef Name="RtypeID" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="RtypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CheckIn_Guest">
+    <End Role="Guest" Type="Self.Guest" Multiplicity="1" />
+    <End Role="CheckIn" Type="Self.CheckIn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Guest">
+        <PropertyRef Name="Gid" />
+      </Principal>
+      <Dependent Role="CheckIn">
+        <PropertyRef Name="Gid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CheckIn_RoomNum">
+    <End Role="RoomNum" Type="Self.RoomNum" Multiplicity="1" />
+    <End Role="CheckIn" Type="Self.CheckIn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RoomNum">
+        <PropertyRef Name="Rno" />
+      </Principal>
+      <Dependent Role="CheckIn">
+        <PropertyRef Name="Rno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoomNum_RoomInfo">
+    <End Role="RoomInfo" Type="Self.RoomInfo" Multiplicity="1" />
+    <End Role="RoomNum" Type="Self.RoomNum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RoomInfo">
+        <PropertyRef Name="RtypeID" />
+      </Principal>
+      <Dependent Role="RoomNum">
+        <PropertyRef Name="RtypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="JustHotelPluscModelStoreContainer">
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CheckIn" EntityType="Self.CheckIn" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Guest" EntityType="Self.Guest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RoomInfo" EntityType="Self.RoomInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RoomNum" EntityType="Self.RoomNum" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BookView" EntityType="Self.BookView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [BookView].[Cname] AS [Cname], 
+    [BookView].[Ctel] AS [Ctel], 
+    [BookView].[CheckinTime] AS [CheckinTime], 
+    [BookView].[CheckoutTime] AS [CheckoutTime], 
+    [BookView].[Rtype] AS [Rtype]
+    FROM [dbo].[BookView] AS [BookView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="CheckInView" EntityType="Self.CheckInView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CheckInView].[Gid] AS [Gid], 
+    [CheckInView].[Gname] AS [Gname], 
+    [CheckInView].[Gtel] AS [Gtel], 
+    [CheckInView].[Rno] AS [Rno], 
+    [CheckInView].[CheckinTime] AS [CheckinTime], 
+    [CheckInView].[CheckoutTime] AS [CheckoutTime], 
+    [CheckInView].[Cash] AS [Cash]
+    FROM [dbo].[CheckInView] AS [CheckInView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="CustmerInfo" EntityType="Self.CustmerInfo" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CustmerInfo].[Cname] AS [Cname], 
+    [CustmerInfo].[Csex] AS [Csex], 
+    [CustmerInfo].[Ctel] AS [Ctel], 
+    [CustmerInfo].[Cpic] AS [Cpic]
+    FROM [dbo].[CustmerInfo] AS [CustmerInfo]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="GuestInfo" EntityType="Self.GuestInfo" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [GuestInfo].[Gname] AS [Gname], 
+    [GuestInfo].[Gsex] AS [Gsex], 
+    [GuestInfo].[Gid] AS [Gid], 
+    [GuestInfo].[Gtel] AS [Gtel]
+    FROM [dbo].[GuestInfo] AS [GuestInfo]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="RoomInfoView" EntityType="Self.RoomInfoView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [RoomInfoView].[Rno] AS [Rno], 
+    [RoomInfoView].[Rtype] AS [Rtype], 
+    [RoomInfoView].[Rfloor] AS [Rfloor], 
+    [RoomInfoView].[Rlive] AS [Rlive], 
+    [RoomInfoView].[Rwindow] AS [Rwindow], 
+    [RoomInfoView].[Rcost] AS [Rcost], 
+    [RoomInfoView].[Rreservation] AS [Rreservation]
+    FROM [dbo].[RoomInfoView] AS [RoomInfoView]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="RoomTypeInfo" EntityType="Self.RoomTypeInfo" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [RoomTypeInfo].[Rtype] AS [Rtype], 
+    [RoomTypeInfo].[Rfloor] AS [Rfloor], 
+    [RoomTypeInfo].[Rlive] AS [Rlive], 
+    [RoomTypeInfo].[Rwindow] AS [Rwindow], 
+    [RoomTypeInfo].[Rcost] AS [Rcost], 
+    [RoomTypeInfo].[Rreservation] AS [Rreservation], 
+    [RoomTypeInfo].[Rpic] AS [Rpic], 
+    [RoomTypeInfo].[RtypeID] AS [RtypeID]
+    FROM [dbo].[RoomTypeInfo] AS [RoomTypeInfo]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Book_Customer" Association="Self.FK_Book_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Book" EntitySet="Book" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Book_RoomInfo" Association="Self.FK_Book_RoomInfo">
+      <End Role="RoomInfo" EntitySet="RoomInfo" />
+      <End Role="Book" EntitySet="Book" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CheckIn_Guest" Association="Self.FK_CheckIn_Guest">
+      <End Role="Guest" EntitySet="Guest" />
+      <End Role="CheckIn" EntitySet="CheckIn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CheckIn_RoomNum" Association="Self.FK_CheckIn_RoomNum">
+      <End Role="RoomNum" EntitySet="RoomNum" />
+      <End Role="CheckIn" EntitySet="CheckIn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoomNum_RoomInfo" Association="Self.FK_RoomNum_RoomInfo">
+      <End Role="RoomInfo" EntitySet="RoomInfo" />
+      <End Role="RoomNum" EntitySet="RoomNum" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

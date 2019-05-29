@@ -1,0 +1,115 @@
+﻿@{
+    ViewBag.Title = ViewBag.username;
+    Layout = "~/Views/Shared/LoginMenu/_Layout.cshtml";
+}
+
+@*--banner area--*@
+<div class="banner jumbotron">
+    <div class="banner-text">
+        @if (Session["UserName"] != null)
+    {<h1>
+            Welcome @Session["UserName"].ToString()
+        </h1>}
+
+     <h2>WELCOME TO JUST INTERNATIONAL HOTEL</h2>
+    </div>
+</div>
+
+@*<%--//banner area--%>*@
+
+@*<%----content----%>*@
+<main class="sub-nav-hero profile">
+    <div class="header">
+        <h3>欢迎来到JUST国际连锁酒店</h3>
+        <h5>WELCOME TO JUST INTERNATIONAL HOTEL</h5>
+        <hr />
+    </div>
+
+    @*<%--hotel profile area--%>*@
+    <div class="hotel-profile hp-block">
+        <div class="profile-text col-md-7">
+            <h1>酒店简介</h1>
+            <p>
+                欢迎来到JUST国际连锁酒店是江苏省豪华酒店中的特色酒店，是一座真正的“外乡的家”，将优雅的高级公寓的豪华舒适与精品酒店的精致奢华完美融合。距离万达商业中心，大市口和火车站几步之遥。酒店独具特色的装饰艺术、装饰风格由著名设计师寸鸿月独家提供，由环境专家提供特有的香薰。它的中城区位置使其成为商务和休闲旅客的理想选择。
+            </p>
+        </div>
+        <div class="profile-img col-md-5">
+            <img style="width:100%" src="../../images/profile.jpg" />
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    @*<%--//hotel profile area--%>*@
+
+    @*<%--image slider area--%>*@
+    <div class="room-profile hp-block">
+        <div class="header">
+            <h3>房间展示</h3>
+            <h5>ROOM SHOW</h5>
+            <hr />
+        </div>
+        <div class="room-img">
+            @{
+                Html.RenderPartial("_imageSlider");
+            }
+        </div>
+        <div class="room-text hp-block">
+            <header class="col-md-2">
+                <h1>宾至如归</h1>
+                <h5>HOUSE AWAY FROM HOME</h5>
+            </header>
+            <p class="col-md-5">
+                运用古希腊罗马建筑和意大利文艺复兴建筑样式和古典柱式的表现方法所呈现出来的视觉艺术效果,极具欧式风格。给人以豪华、大气、奢侈的视觉印象。重视形式构图方面的美感，多采用对称结构变换，重复组合等手法使酒店营造出宏达的结构感觉。
+            </p>
+            <p class="col-md-5">
+                运用古希腊罗马建筑和意大利文艺复兴建筑样式和古典柱式的表现方法所呈现出来的视觉艺术效果,极具欧式风格。给人以豪华、大气、奢侈的视觉印象。重视形式构图方面的美感，多采用对称结构变换，重复组合等手法使酒店营造出宏达的结构感觉。
+            </p>
+            <div class="clearfix"></div>
+            <div class="button-holder">
+                <button class="btn-more btn col-md-1">MORE</button>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+    </div>
+    @*<%--//image slider area--%>*@
+
+    @*<%----entertainment show----%>*@
+    <div class="dinner-show hp-block">
+        <div class="entertainment-img"></div>
+        <div class="entertainment-block">
+            <div class="entertainment-text">
+                <h1>娱乐设施</h1>
+                <p>JUST国际连锁酒店提供真正的纽约用餐体验。无论在早晨还是深夜，客人都可以在酒店的餐厅和休息室内找到美食和饮品。</p>
+                <a class="btn">开启美食之旅</a>
+            </div>
+            <div class="ettm-wrap">
+                <div class="col-md-6">
+                    <div class="ettm-coffee">
+                        <div class="ettm-img"></div>
+                        <div class="ettm-txt">
+                            <div class="dec"></div>
+                            <h3>MIS 咖啡厅</h3>
+                            <h4>CAFE</h4>
+                            <p>晚餐和表演晚餐，夜总会提供独特的私密空间，在咖啡厅，客人可以体验最优雅和精致的音乐享受。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="ettm-fitness">
+                        <div class="ettm-img"></div>
+                        <div class="ettm-txt">
+                            <div class="dec"></div>
+                            <h3>MIS 健身中心</h3>
+                            <h4>FITNESS</h4>
+                            <p>健身中心确保客人在旅行时能够承诺健身计划。结合高级健身中心最先进的健身器材和现场训练器。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    @*<%----//entertainment show----%>*@
+
+</main>

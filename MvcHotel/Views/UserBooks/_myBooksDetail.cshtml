@@ -1,0 +1,90 @@
+﻿@model MvcHotel.Models.Book
+
+<div id="reservehead">
+    <div class="backbtn"><i class="fas fa-arrow-circle-left"></i></div>
+    <div class="title">订单详情</div>
+    <div class="canclebtn">
+        @using (Html.BeginForm("Delete", "UserBooks"))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-actions no-color">
+            <input type="submit" class="cancle" value="取消订单" />
+        </div>
+}
+        
+    </div>
+</div>
+<div id="reservemsg">
+    <div class="top row">
+        <div class="message col-md-6"><b>订单信息</b></div>
+        <div class="summary col-md-6">
+            <b>订单总额</b>
+            <span class="number">
+                <b>￥ @Html.DisplayFor(model => model.RoomInfo.Rcost)</b>
+            </span>
+        </div>
+    </div>
+    <hr />
+    <div class="content">
+        <div class="bottom">
+            <span>订单状态</span>
+            <span></span>
+            <!--<span class="order_status_text_confirm order_pay">已支付</span><span class="order_status_text_confirm order_wait">待支付</span><span class="order_status_text_confirm order_delete">已取消</span><span class="order_status_text_confirm order_complete">已入住</span>--><!--说明：注释的部分为订单的不同的状态-->
+        </div>
+        <div class="bottom">
+            <span>入住时间</span>
+            <span>@Html.DisplayFor(model => model.CheckoutTime)</span>
+        </div>
+        <div class="bottom">
+            <span>退房时间</span>
+            <span>@Html.DisplayFor(model => model.CheckinTime)</span>
+        </div>
+    </div>
+    <div class="continuebtn">
+        <input type="button" class="continue btn btn-default" value="生成延住订单" />
+    </div>
+
+</div>
+
+<div id="customermsg">
+    <div class="customerdownbtn">
+        <i class="fas fa-angle-down"></i>
+    </div>
+    <div class="customerupbtn">
+        <i class="fas fa-angle-up"></i>
+    </div>
+    @using (Html.BeginForm("Edit", "UserBooks"))
+    {
+        @Html.AntiForgeryToken()
+        <table class="sort">
+            <tr><th>房客信息</th></tr>
+            <tr>
+                <td>
+                    <div class="customer"><span>注册姓名：</span><span>@Html.DisplayFor(model => model.Customer.Cname)</span></div>
+
+                    @Html.HiddenFor(model => model.Bid)
+                    <div class="customer"><span>注册号码：</span><span>@Html.EditorFor(model => model.Ctel, new { htmlAttributes = new { @class = "form-control", @disabled = "disbled" } })</span></div>
+                    <div class="customer"><span>入住时间：</span><span>@Html.EditorFor(model => model.CheckinTime, new { htmlAttributes = new { @class = "form-control", @disabled = "disbled" } })</span></div>
+                    <div class="customer"><span>退房时间：</span><span>@Html.EditorFor(model => model.CheckoutTime, new { htmlAttributes = new { @class = "form-control" } })</span></div>
+                    <div class="customer"><span>所选房型：</span><span>@Html.DropDownList("RtypeID", null, htmlAttributes: new { @class = "form-control" })</span></div>
+                    @*<div class="customer"><span>预定人数：</span><span></span></div>*@
+
+                </td>
+            </tr>
+            @*<tr><th>入住信息</th></tr>
+                <tr>
+                    <td>
+                        <div class="customer"><span>登记状态：</span><span></span></div>
+                        <!--有入住时间的为已登记-->
+                        <div class="customer"><span>房间号:</span><span></span></div>
+                        <!-- 前台登记后分配-->
+                        <div class="customer"><span>押金：</span><span>￥0</span></div>
+                    </td>
+                </tr>*@
+        </table>
+        <div class="row">
+            <input type="submit" value="提交" class="btn btn-default" />
+        </div>
+
+    }
+</div>

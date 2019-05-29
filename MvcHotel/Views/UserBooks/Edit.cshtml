@@ -1,0 +1,187 @@
+﻿@model MvcHotel.Models.Book
+
+@{
+    ViewBag.Title = "我的用户信息";
+    Layout = "~/Views/Shared/LoginMenu/_Layout.cshtml";
+}
+
+<div class="myinfo-banner jumbotron">
+    <div class="banner-mask">
+        <div class="banner-title-wrap">
+            <h1>@ViewBag.Title</h1>
+            <h2>MY INFORMATION</h2>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="min-height:1000px">
+    <div class="col-md-3">
+        <div class="left-my-info">
+            <div class="portrait-img">
+                <img src="@Html.DisplayFor(model => model.Customer.Cpic)" alt="头像">
+            </div>
+            <div class="my-info-detail">
+                <h2>@Html.DisplayFor(model => model.Customer.Cname)</h2>
+                <section>
+                    <label><i class="fab fa-odnoklassniki"></i>@Html.DisplayNameFor(model => model.Customer.Csex)：</label>
+                    <div>@(Model.Customer.Csex ? "男" : "女")</div>
+                </section>
+                <section>
+                    <label><i class="fas fa-phone"></i>@Html.DisplayNameFor(model => model.Ctel)：</label>
+                    <div id="my-id">@Html.DisplayFor(model => model.Ctel)</div>
+                </section>
+                <button id="edit-my-info" class="btn btn-default btm-btn">编辑</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="right-my-order">
+            <div id="reservehead" class="row">
+                <div class="backbtn col-md-1"><i class="fas fa-arrow-circle-left"></i></div>
+                <div class="title col-md-8">订单详情</div>
+                <div class="canclebtn col-md-3">
+                    @using (Html.BeginForm("Delete", "UserBooks"))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-actions no-color">
+                    <input type="submit" class="cancle btn btn-default" value="取消订单" />
+                </div>
+    }
+
+                </div>
+            </div>
+            <div id="reservemsg">
+                <div class="top row">
+                    <div class="message col-md-6"><b>订单信息</b></div>
+                    <div class="summary col-md-6">
+                        <b>订单总额</b>
+                        <span class="number">
+                            <b>￥ @Html.DisplayFor(model => model.RoomInfo.Rcost)</b>
+                        </span>
+                    </div>
+                </div>
+                <hr />
+                <div class="content">
+                    <div class="bottom">
+                        <span>订单状态</span>
+                        <span></span>
+                        <!--<span class="order_status_text_confirm order_pay">已支付</span><span class="order_status_text_confirm order_wait">待支付</span><span class="order_status_text_confirm order_delete">已取消</span><span class="order_status_text_confirm order_complete">已入住</span>--><!--说明：注释的部分为订单的不同的状态-->
+                    </div>
+                    <div class="bottom">
+                        <span>入住时间</span>
+                        <span>@Html.DisplayFor(model => model.CheckoutTime)</span>
+                    </div>
+                    <div class="bottom">
+                        <span>退房时间</span>
+                        <span>@Html.DisplayFor(model => model.CheckinTime)</span>
+                    </div>
+                </div>
+                <div class="continuebtn">
+                    <input type="button" class="continue btn btn-default" value="生成延住订单" />
+                </div>
+
+            </div>
+
+            <div id="customermsg">
+                <div class="customerdownbtn">
+                    <i class="fas fa-angle-down"></i>
+                </div>
+                <div class="customerupbtn">
+                    <i class="fas fa-angle-up"></i>
+                </div>
+                @using (Html.BeginForm("Edit", "UserBooks"))
+        {
+            @Html.AntiForgeryToken()
+            <table class="sort">
+                <tr><th>房客信息</th></tr>
+                <tr>
+                    <td>
+                        <div class="customer"><span>注册姓名：</span><span>@Html.DisplayFor(model => model.Customer.Cname)</span></div>
+
+                        @Html.HiddenFor(model => model.Bid)
+                        <div class="customer"><span>注册号码：</span><span>@Html.EditorFor(model => model.Ctel, new { htmlAttributes = new { @class = "form-control", @disabled = "disbled" } })</span></div>
+                        <div class="customer"><span>入住时间：</span><span>@Html.EditorFor(model => model.CheckinTime, new { htmlAttributes = new { @class = "form-control", @disabled = "disbled" } })</span></div>
+                        <div class="customer"><span>退房时间：</span><span>@Html.EditorFor(model => model.CheckoutTime, new { htmlAttributes = new { @class = "form-control" } })</span></div>
+                        <div class="customer"><span>所选房型：</span><span>@Html.DropDownList("RtypeID", null, htmlAttributes: new { @class = "form-control" })</span></div>
+                        @*<div class="customer"><span>预定人数：</span><span></span></div>*@
+
+                    </td>
+                </tr>
+                @*<tr><th>入住信息</th></tr>
+            <tr>
+                <td>
+                    <div class="customer"><span>登记状态：</span><span></span></div>
+                    <!--有入住时间的为已登记-->
+                    <div class="customer"><span>房间号:</span><span></span></div>
+                    <!-- 前台登记后分配-->
+                    <div class="customer"><span>押金：</span><span>￥0</span></div>
+                </td>
+            </tr>*@
+            </table>
+            <div class="row">
+                <input type="submit" value="提交" class="btn btn-default" />
+            </div>
+
+}
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    colHeight = document.documentElement.clientHeight;
+    $(".ser-banner").height(colHeight);
+    $(".banner-mask").height(colHeight);
+</script>
+<script>
+    $(document).ready(function () {
+        let aid=$("#my-id").html();
+        $("#edit-my-info").on("click", function() {
+            $.ajax({
+                url: "@Url.Action("_Editpart", "UserCustomers", new { id = Model.Ctel })",
+                type: "GET",
+                data: { id: aid }
+            })
+            .done(function(partialViewResult) {
+                $(".left-my-info").html(partialViewResult);
+            });
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $(".sort").hide();
+        $(".customerupbtn").hide();
+        $(".customerdownbtn").click(function () {
+            $(".sort").show();
+            $(this).hide();
+            $(".customerupbtn").show();
+        });
+        $(".customerupbtn").click(function () {
+            $(".sort").hide();
+            $(this).hide();
+            $(".customerdownbtn").show();
+        });
+    });
+</script>
+@*<script src="/Scripts/bootstrap-datetimepicker.min.js"></script>
+    <script src="/Scripts/bootstrap-datetimepicker.zh-CN.js"></script>*@
+<script type="text/javascript">
+    var dateRange1 = new pickerDateRange('date1', {
+        stopToday: false,
+        isTodayValid: true,
+        startDate: '2018-05-15',
+        endDate: '2018-05-16',
+        needCompare: false,
+        defaultText: ' 离开 ',
+        autoSubmit: false,
+        inputTrigger: 'input_trigger1',
+        theme: 'ta'
+    });
+</script>
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@

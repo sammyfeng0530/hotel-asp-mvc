@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="51bd3d97f5e64a18b9962e3c6fb4d94c" Name="Diagram1">
+        <EntityTypeShape EntityType="JustHotelPluscModel.Admin" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JustHotelPluscModel.Book" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JustHotelPluscModel.CheckIn" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JustHotelPluscModel.Customer" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JustHotelPluscModel.Guest" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="JustHotelPluscModel.RoomInfo" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="JustHotelPluscModel.RoomNum" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="JustHotelPluscModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JustHotelPluscModel.BookView" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JustHotelPluscModel.CheckInView" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JustHotelPluscModel.CustmerInfo" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JustHotelPluscModel.GuestInfo" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JustHotelPluscModel.RoomInfoView" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JustHotelPluscModel.RoomTypeInfo" Width="1.5" PointX="5.75" PointY="10.75" IsExpanded="true" />
+        <AssociationConnector Association="JustHotelPluscModel.FK_Book_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="JustHotelPluscModel.FK_Book_RoomInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="JustHotelPluscModel.FK_CheckIn_Guest" ManuallyRouted="false" />
+        <AssociationConnector Association="JustHotelPluscModel.FK_CheckIn_RoomNum" ManuallyRouted="false" />
+        <AssociationConnector Association="JustHotelPluscModel.FK_RoomNum_RoomInfo" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<MvcHotel.Models.RoomNum>
+<table class="table">
+    <tr>
+        <th>
+            房间号
+        </th>
+        <th>
+            房间类型
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomInfo.Rtype)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RtypeID)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Rno }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Rno }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Rno }) |
+                @*@using (Html.BeginForm("Delete", "UserRoomNum", FormMethod.Post, new { id = item.Rno }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-actions no-color">
+                                <input type="submit" value="Delete" class="btn btn-default" />
+                            </div>
+                    }*@
+            </td>
+        </tr>
+    }
+
+</table>
+

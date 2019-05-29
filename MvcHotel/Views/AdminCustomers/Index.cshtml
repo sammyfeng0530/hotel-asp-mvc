@@ -1,0 +1,127 @@
+﻿@*@model IEnumerable<MvcHotel.Models.Customer>*@
+@model PagedList.IPagedList<MvcHotel.Models.Customer>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "用户管理";
+    Layout = "~/Views/Shared/AdminMenu/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="admin-search-box">
+    @using (Html.BeginForm())
+    {
+        <div class="col-sm-2">
+            <button class="btn">@Html.ActionLink("新建用户", "Create")</button>
+        </div>
+        <div class="col-sm-2">
+            <button class="btn" type="submit">所有用户</button>
+        </div>
+        <div class="col-sm-4">
+            <label>选择条件：</label>
+            <select name="findClass" class="admin-search-box-select">
+                <option>--选择--</option>
+                <option value="Cname">姓名</option>
+                <option value="Ctel">电话</option>
+            </select>
+        </div>
+        <div class="search-box-input col-sm-4">
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "" })
+            <input class="admin-search-box-btn" type="submit" value="Search" width="50" />
+        </div>
+        <div class="clearfix"></div>
+    }
+</div>
+@using (Html.BeginForm("MultDelete", "AdminCustomers"))
+{<table class="tb admin-table" cellspacing="0">
+        <thead>
+            <tr>
+                <th>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="selectAll" /><i class="replace"></i>
+                    </label>
+                    <input type="submit" value="多选删除" class="btn" onclick="return confirm('确定要删除吗?')" />
+                </th>
+                <th>
+                    姓名
+                </th>
+                <th>
+                    性别
+                </th>
+                <th>
+                    联络方式
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="checkitem" value="@item.Ctel"><i class="replace"></i>
+                        </label>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cname)
+                    </td>
+                    <td>
+                        @(item.Csex ? "男" : "女")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ctel)
+                    </td>
+                    <td>
+                        @Html.ActionLink("编辑", "Edit", new { id = item.Ctel }, new { @class = "far fa-edit" }) |
+                        @*@Html.ActionLink("详情", "Details", new { id = item.Bid }, new { @class = "far fa-trash-alt" }) |*@
+                        @Html.ActionLink("删除", "Delete", new { id = item.Ctel }, new { onclick = "return confirm('确定删除吗？')", @class = "far fa-trash-alt" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @*</table>
+        <table class="table">
+            <tr>
+                <th>
+                    <input type="checkbox" id="selectAll" />
+                    <input type="submit" value="多选删除" class="btn" onclick="return confirm('确定要删除吗?')" />
+                </th>
+                <th>
+                    姓名
+                </th>
+                <th>
+                    性别
+                </th>
+                <th>
+                    联络方式
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.CheckBox("checkitem", new { value = item.Ctel })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cname)
+                    </td>
+                    <td>
+                        @(item.Csex ? "男" : "女")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ctel)
+                    </td>
+                    <td>
+                        @Html.ActionLink("编辑", "Edit", new { id = item.Ctel }) |
+                        @Html.ActionLink("详情", "Details", new { id = item.Ctel }) |
+                        @Html.ActionLink("删除", "Delete", new { id = item.Ctel }, new { onclick = "return confirm('确定删除吗？')" })
+                    </td>
+                </tr>
+            }
+
+        </table>*@
+}
+           Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))

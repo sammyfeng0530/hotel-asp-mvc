@@ -1,0 +1,29 @@
+﻿@model Nullable<bool>
+@if (Model.HasValue)
+{
+    if (Model.Value)
+    {
+        @Html.Encode("男")
+        @*<text>男</text>*@
+
+    }
+    else
+    {
+        @Html.Encode("女")
+        @*<text>女</text>*@
+    }
+}
+else
+{
+    @*@Html.Encode("女")*@
+    <text>未设置</text>
+}
+
+
+@*@Html.DropDownList("",
+        new SelectListItem[] {
+    new SelectListItem()
+    { Text = "男", Value = "true" },
+    new SelectListItem()
+    { Text = "女", Value = "false"}
+        })*@

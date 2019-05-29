@@ -1,0 +1,82 @@
+﻿@model IEnumerable<MvcHotel.Models.Book>
+
+<div id="history">
+    <div id="historyhead" class="hisreserve">
+        <panel id="current" class="panel">最近订单<i class="fas fa-angle-double-right"></i></panel>
+        <panel id="all" class="panel">全部订单<i class="fas fa-angle-double-left"></i></panel>
+    </div>
+    <div id="history_single" class="hisreserve">
+        <!--逾期的订单都将呈现在历史订单中-->
+        @foreach (var item in Model)
+    {
+        <div class="historymsg">
+            <!-- 单个历史账单-->
+            <div id="historyroom" class="hisset" style="background-image:url(@Html.DisplayFor(modelItem => item.RoomInfo.Rpic))"></div>
+            <div id="historycontent" class="hisset">
+                <span class="history_detail" id="history_username">@Html.DisplayFor(modelItem => item.Customer.Cname)<!--用户名--></span>
+                <span class="history_detail">@Html.DisplayFor(modelItem => item.CheckinTime) 至 @Html.DisplayFor(modelItem => item.CheckoutTime)<!--实际具体日期--></span>
+                @*<span class="history_detail">预定4人*@<!--下单预约人数-->@*</span>*@
+                <span class="history_detail">@Html.DisplayFor(modelItem => item.RoomInfo.Rtype)<!--住宿房间类型--></span>
+                <hr />
+                <span class="history_detail">@Html.DisplayFor(modelItem => item.RoomInfo.Rcost)<!--合计订单费用--></span>
+            </div>
+            @Html.ActionLink("详情", "Edit", new { id = item.Bid })
+        </div>
+        @*<script>
+    $(document).ready(function () {
+        //let aid=$("#my-id").html();
+        $("#book-detail").on("click", function() {
+            $.ajax({
+                url: "@Url.Action("_myBooksDetail", "UserBooks", new { id = item.Bid })",
+                type: "GET",
+                data: { /*id: item.Bid*/ }
+            })
+            .done(function(partialViewResult) {
+                $("#history").html(partialViewResult);
+            });
+        });
+    });
+
+        </script>*@
+}
+        <div class="clearfix"></div>
+    </div>
+</div>
+<script>
+    //全部订单展开和收起
+    $(document).ready(function () {
+        $("#all").hide();
+        $(".historymsg").hide();
+        $("#history_single").find(".historymsg").eq(0).show();
+        $("#current").click(function () {
+            $("#all").show();
+            $(this).hide();
+            $(".historymsg").show();
+        });
+        $("#all").click(function () {
+            $("#current").show();
+            $(this).hide();
+            $(".historymsg").hide();
+            $("#history_single").find(".historymsg").eq(0).show();
+        });
+    })
+</script>
+@*<script>
+    $(document).ready(function () {
+        $(".historymsg").click(function () {
+            window.open("reserve.html", "_parent");
+        })
+        let aid=$("#my-id").html();
+        $(".historymsg").on("click", function() {
+            $.ajax({
+                url: "@Url.Action("_Editpart", "UserCustomers", new { id = Model.Bid })",
+                type: "GET",
+                data: { id: aid }
+            })
+            .done(function(partialViewResult) {
+                $(".left-my-info").html(partialViewResult);
+            });
+        });
+    });
+    
+</script>*@

@@ -1,0 +1,185 @@
+﻿@model MvcHotel.Models.Customer
+<div class="mask"></div>
+<div class="popup-form">
+    <div class="btn-close-wrap">
+        <div class="btn-close fas fa-times"></div>
+    </div>
+    <ul class="tab-group">
+        <li class="tab active"><a href="#signup">注册</a></li>
+        <li class="tab"><a href="#login">登录</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="signup">
+            <h1>免费注册</h1>
+            @using (Html.BeginForm("Create", "UserCustomers", @FormMethod.Post, new { id = "reg-form", name = "reg-form", @class = "reg-form" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="top-row">
+                    <div class="field-wrap">
+                        <label>
+                            姓名<span class="req">*</span>
+                        </label>
+                        @Html.EditorFor(model => model.Cname, new { htmlAttributes = new { @name = "Cname" } })
+                        @Html.ValidationMessageFor(model => model.Cname, "", new { @class = "text-danger" })
+                        @*<input type="text" name="username" size="20" required autocomplete="off" />*@
+                    </div>
+                    <div class="field-wrap">
+                        <label>
+                            手机号码<span class="req">*</span>
+                        </label>
+                        @Html.EditorFor(model => model.Ctel, new { htmlAttributes = new { @name = "Ctel" } })
+                        @*<input type="text" name="phone" size="25" required autocomplete="off" />*@
+                        @Html.ValidationMessageFor(model => model.Ctel, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="field-wrap">
+                    <label for="regPwd">
+                        密码<span class="req">*</span>
+                    </label>
+                    @Html.EditorFor(model => model.Cpwd, new { htmlAttributes = new { @type = "password", @id = "regPwd", @name = "regPwd" } })
+                    @Html.ValidationMessageFor(model => model.Cpwd, "", new { @class = "text-danger" })
+                    @*<input type="password" required autocomplete="off" />*@
+                </div>
+                <div class="field-wrap">
+                    <label for="regPwdAgain">
+                        确认密码<span class="req">*</span>
+                    </label>
+                    <input id="regPwdAgain" name="regPwdAgain" type="password" required autocomplete="off" />
+                </div>
+                <button type="submit" class="button button-block btnReg" value="Create">确认</button>
+            }
+        </div>
+        <div id="login">
+            <h1>登录</h1>
+            @using (Html.BeginForm("Login", "User", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @*@Html.ValidationSummary(true)*@
+                <div class="field-wrap">
+                    <label>
+                        用户名<span class="req">*</span>
+                    </label>
+                    @Html.TextBoxFor(a => a.Ctel)
+                    @*<input type="text" name="txtUsername" required autocomplete="off" />*@
+                </div>
+                <div class="field-wrap">
+                    <label>
+                        密码<span class="req">*</span>
+                    </label>
+                    @Html.PasswordFor(a => a.Cpwd)
+                    @*<input type="password" name="txtPwd" required autocomplete="off" />*@
+                </div>
+                <p class="forgot"><a href="#">忘记密码？</a></p>
+                <button class="button button-block btnLogin" type="submit">确认</button>
+            }
+        </div>
+    </div>
+    <!-- tab-content -->
+</div>
+<!-- /form -->
+<script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
+    <script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
+    <script src="~/Scripts/popup.js"></script>
+    <script>
+        // just for the demos, avoids form submit
+        //jQuery.validator.setDefaults({
+        //    debug: true,
+        //    success: "valid"
+        //});
+        //$("#reg-form").validate({
+        //    rules: {
+        //        regPwdAgain: {
+        //            equalTo: "#regPwd"
+        //        }
+        //    }
+        //});
+        //$(".tip").hide();
+        //function checkpas1() {//当第一个密码框失去焦点时，触发checkpas1事件
+        //    var pas1 = $("#regPwd").val();
+        //    var pas2 = $("#regPwdAgain").val();//获取两个密码框的值
+        //    if (pas1 != pas2 && pas2 != "")//此事件当两个密码不相等且第二个密码是空的时候会显示错误信息
+        //        $(".tip").show();
+        //    else
+        //        $(".tip").hide();//若两次输入的密码相等且都不为空时，不显示错误信息。
+        //}
+        //function checkpas() {//当第一个密码框失去焦点时，触发checkpas2件
+        //    var pas1 = $("#regPwd").val();
+        //    var pas2 = $("#regPwdAgain").val();//获取两个密码框的值
+        //    if (pas1 != pas2) {
+        //        $(".tip").show();//当两个密码不相等时则显示错误信息
+        //    } else {
+        //        $(".tip").hide();
+        //    }
+        //}
+        //function checkpas2() {//点击提交按钮时，触发checkpas2事件，会进行弹框提醒以防无视错误信息提交
+        //    var pas3 = $("#regPwd").val();
+        //    var pas4 = $("#regPwdAgain").val();
+        //    if (pas3 != pas4) {
+        //        alert("两次输入的密码不一致！");
+        //        return false;
+        //    }
+        //}
+        //$().ready(function () {
+            // 在键盘按下并释放及提交后验证提交表单
+        $("#reg-form").validate({
+            rules: {
+                Cname: "required",
+                regPwd: {
+                    required: true,
+                    minlength: 3
+                },
+                Ctel: {
+                    required: true,
+                    minlength: 5
+                },
+                regPwdAgain: {
+                    required: true,
+                    minlength: 3,
+                    equalTo: "#regPwd"
+                }
+            },
+            messages: {
+                Cname: "请输入姓名",
+                Ctel: {
+                    required: "请输入电话号码",
+                    minlength: "电话号码长度不能小于 5 "
+                },
+                regPwd: {
+                    required: "请输入密码",
+                    minlength: "密码长度不能小于 3 个字母"
+                },
+                regPwdAgain: {
+                    required: "请输入密码",
+                    minlength: "密码长度不能小于 3 个字母",
+                    equalTo: "两次密码输入不一致"
+                }
+            }
+        });
+        //});
+    </script>
+
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $(".mask").height(document.documentElement.clientHeight * 2);
+        $(".login-btn").click(function () {
+            if ($(".mask").css("display") == "none") {
+                $(".mask").fadeIn(100);
+                $(".popup-form").slideDown(200);
+                $("body").css("overflow", "hidden");
+            }
+        });
+        $(".btn-close").on("click", function () {
+            $(".mask").fadeOut(100);
+            $(".popup-form").slideUp(100);
+            $("body").css("overflow", "scroll");
+        });
+
+        $(".mask").on("click", function () {
+            $(".mask").fadeOut(100);
+            $(".popup-form").slideUp(100);
+            $("body").css("overflow", "scroll");
+        });
+    });
+
+</script>
+<script type="text/javascript" src="~/Scripts/popup.js"></script>

@@ -1,0 +1,25 @@
+﻿@model IEnumerable<MvcHotel.Models.Admin>
+
+    <div class="admin-left-list col-md-5">
+        <ul>
+            <li>
+                <h3>管理员列表</h3>
+            </li>
+            @foreach (var item in Model)
+            {
+        <li>
+            <img src="@Html.DisplayFor(modelItem => item.Apic)" alt="头像" class="img-responsive"/>
+            <div class="admin-left-list-item">
+                <section>
+                    <i class="fas fa-user"></i>
+                    <div>@Html.DisplayFor(modelItem => item.Aname)</div>
+                </section>
+                <section>
+                    <i class="fas fa-phone"></i>
+                    <div>@Html.DisplayFor(modelItem => item.Atel)</div>
+                </section>
+            </div>
+        </li>
+            }
+        </ul>
+    </div>

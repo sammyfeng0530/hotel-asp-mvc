@@ -1,0 +1,103 @@
+﻿@*<header class="nav menu">*@
+<div class="cd-auto-hide-header cd-primary-nav" id="cd-navigation" style="background:#fff;">
+    <div class="menu-header" style="padding:30px 0;">
+        <div class="title admin-title" style="margin-left:20%;">
+            <p>Just Hotel Database Management</p>
+        </div>
+        @*<div class="menu-nav">
+                <div class="menu-btn">
+                    <span>订购管理</span>
+                    <div class="menu-content">
+                        <ul>
+                            <li>@Html.ActionLink("用户管理", "Index", "AdminCustomers")</li>
+                            <li>@Html.ActionLink("订房管理", "Index", "AdminBooks")</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="menu-btn">
+                    <span>登记入住</span>
+                    <div class="menu-content">
+                        <ul>
+                            <li>@Html.ActionLink("入住管理", "Index", "AdminGuests")</li>
+                            <li>@Html.ActionLink("登记入住", "Index", "AdminCheckIns")</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="menu-btn">
+                    <span>房间管理</span>
+                    <div class="menu-content">
+                        <ul>
+                            <li>@Html.ActionLink("房型管理", "Index", "AdminRoomInfoes")</li>
+                            <li>@Html.ActionLink("房号管理", "Index", "AdminRoomNums")</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>*@
+    </div>
+    <div class="logo">
+        <img src="../../images/logo.png" width="80" />
+    </div>
+    <input id="clock" type="text">
+    <div class="rightbutton">
+
+        @using (Html.BeginForm("index", "Admin", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <span class="mybook"><button class="my-book" type="submit">我的信息</button></span>
+        }
+
+        <span style="color: #B4B4B4">|</span>
+        @using (Html.BeginForm("Logout", "Admin", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <span class="logoutbtn"><button class="logout-btn" type="submit">登出</button></span>
+            <div class="clearfix"></div>
+        }
+    </div>
+</div>
+
+</header>
+<div class="clearfix"></div>
+<nav class="cd-auto-display-header cd-secondary-nav">
+    <div class="menu-header">
+        <div class="menu-logo">
+            <img src="../../images/logo.png" width="50" />
+        </div>
+        <div class="menu-nav">
+            <div class="menu-btn">
+                <span>订购管理</span>
+                <div class="menu-content">
+                    <ul>
+                        <li>@Html.ActionLink("用户管理", "Index", "AdminCustomers")</li>
+                        <li>@Html.ActionLink("订房管理", "Index", "AdminBooks")</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="menu-btn">
+                <span>登记入住</span>
+                <div class="menu-content">
+                    <ul>
+                        <li>@Html.ActionLink("入住管理", "Index", "AdminGuests")</li>
+                        <li>@Html.ActionLink("登记入住", "Index", "AdminCheckIns")</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="menu-btn">
+                <span>房间管理</span>
+                <div class="menu-content">
+                    <ul>
+                        <li>@Html.ActionLink("房型管理", "Index", "AdminRoomInfoes")</li>
+                        <li>@Html.ActionLink("房号管理", "Index", "AdminRoomNums")</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="rightbutton">
+            @using (Html.BeginForm("index", "Admin", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <span class="mybook"><button class="my-book" type="submit">我的信息</button></span>
+}
+        </div>
+    </div>
+</nav>

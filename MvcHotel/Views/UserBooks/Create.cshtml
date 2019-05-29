@@ -1,0 +1,151 @@
+﻿@model MvcHotel.Models.Book
+@{
+    ViewBag.Title = "房间预定";
+    Layout = "~/Views/Shared/LoginMenu/_Layout.cshtml";
+}
+<div class="ser-banner jumbotron">
+    <div class="banner-mask">
+        <div class="banner-title-wrap">
+            <h1>房间预定</h1>
+            <h2>RESERVATION</h2>
+        </div>
+    </div>
+</div>
+<main class="main-content container">
+    <form action="~/UserBooks/Create" method="get">
+        <input class="all-search-room-btn" type="submit" value="所有房型>>>">
+    </form>
+    <div class="res-room-info col-md-8">
+
+        @{
+            Html.RenderAction("_RoomInfo");
+        }
+    </div>
+    <div class="res-book-form-wrap col-md-4">
+        <div class="res-book-form">
+            <h2>订单</h2>
+            @using (Html.BeginForm("Create", "UserBooks", @FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div class="book-form-content" id="book-form-content">
+                    <div class="check-in-out-time form-group clearfix">
+                        <div class="col-md-12">
+                            <label for="">入住时间</label>
+                            @*calender here*@
+                            <div class="controls input-append date form_datetime" data-date="2018-05-17T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
+                                <span class="add-on"><i class="icon-th"></i></span>
+                                <input size="30" type="text" value="" readonly>
+                                <span class="right-icon btn add-on">
+                                    <span class="far fa-calendar-alt "></span>
+                                </span>
+                            </div>
+
+                            @Html.EditorFor(model => model.CheckinTime, new { htmlAttributes = new { @id = "dtp_input1", @type = "hidden" } })
+                            @*<input type="hidden" id="dtp_input1" value="" />*@
+                            @*calender here*@
+                        </div>
+                    </div>
+                    <div class="check-in-out-time form-group clearfix">
+                        <div class="col-md-12">
+                            <label for="">离店时间</label>
+                            @*calender here*@
+                            <div class="controls input-append date form_datetime" data-date="2018-05-17T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input2">
+                                <span class="add-on"><i class="icon-th"></i></span>
+                                <input size="30" type="text" value="" readonly>
+                                <span class="right-icon btn add-on">
+                                    <span class="far fa-calendar-alt "></span>
+                                </span>
+                            </div>
+                            @Html.EditorFor(model => model.CheckoutTime, new { htmlAttributes = new { @id = "dtp_input2", @type = "hidden" } })
+                            @*<input type="hidden" id="dtp_input1" value="" />*@
+
+                            @*calender here*@
+                        </div>
+                    </div>
+                    <div class="select-room-info-detail form-group clearfix">
+                        <div class="col-md-12">
+                            <label>房间类型</label>
+                            @Html.DropDownList("RtypeID", null, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                            @Html.LabelFor(model => model.Ctel, "Ctel", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Ctel, new { htmlAttributes = new {  } })
+                                @Html.ValidationMessageFor(model => model.Ctel, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
+                    @Html.EditorFor(model => model.Ctel, new { htmlAttributes = new { @type = "hidden" } })
+                    @Html.TextBox("hidden-username", (string)ViewBag.Ctel, new { @id = "Ctel", @type = "hidden" })
+                    <div class="select-room-info-detail form-group clearfix">
+                        <div class="col-md-12">
+                            <label>房间数</label>
+                            <input runat="server" id="room-quantity" data-step="1" data-min="1" data-max="10" data-digit="0" value="1" />
+                        </div>
+                        <div class="col-md-12">
+                            <label>客人数</label>
+                            <input runat="server" id="guest-quantity" data-step="1" data-min="1" data-max="10" data-digit="0" value="1" />
+                        </div>
+                    </div>
+                </div>
+                <div class="res-btn-wrap">
+                    <button class="res-btn btn" type="submit">确认下单</button>
+                </div>
+            }
+        </div>
+    </div>
+</main>
+<script>
+    $("#Ctel").val(@ViewBag.Ctel);
+</script>
+<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        format: 'yyyy-mm-dd H:mm:ss',
+        initialDate: new Date(),
+        language: 'zh-CN',
+        weekStart: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1
+    });
+</script>
+<script>
+    colHeight = document.documentElement.clientHeight;
+    $(".ser-banner").height(colHeight);
+    $(".banner-mask").height(colHeight);
+
+</script>
+<script type="text/javascript" src="Scripts/num-alignment.js"></script>
+<script>
+
+    // 自定义类型：参数为数组，可多条数据
+    alignmentFns.createType([{ "test": { "step": 1, "min": 1, "max": 10, "digit": 0 } }]);
+
+    // 初始化
+    alignmentFns.initialize();
+
+    // 销毁
+    alignmentFns.destroy();
+
+    // js动态改变数据
+    $("#room-quantity").attr("data-max", "12")
+    // 初始化
+    alignmentFns.initialize();
+
+</script>
+@*<script type="text/javascript">
+    var dateRange1 = new pickerDateRange('date1', {
+        stopToday: false,
+        isTodayValid: true,
+        startDate: '2018-05-15',
+        endDate: '2018-05-16',
+        needCompare: false,
+        defaultText: ' 离开 ',
+        autoSubmit: false,
+        inputTrigger: 'input_trigger1',
+        theme: 'ta'
+    });
+</script>*@
+

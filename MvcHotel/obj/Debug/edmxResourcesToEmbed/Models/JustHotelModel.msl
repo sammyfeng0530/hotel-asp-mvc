@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="JustHotelPlusModelStoreContainer" CdmEntityContainer="JustHotelPlusEntities">
+    <EntitySetMapping Name="Book">
+      <EntityTypeMapping TypeName="JustHotelPlusModel.Book">
+        <MappingFragment StoreEntitySet="Book">
+          <ScalarProperty Name="CheckinTime" ColumnName="CheckinTime" />
+          <ScalarProperty Name="Ctel" ColumnName="Ctel" />
+          <ScalarProperty Name="CheckoutTime" ColumnName="CheckoutTime" />
+          <ScalarProperty Name="Rtype" ColumnName="Rtype" />
+          <ScalarProperty Name="Bid" ColumnName="Bid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CheckIn">
+      <EntityTypeMapping TypeName="JustHotelPlusModel.CheckIn">
+        <MappingFragment StoreEntitySet="CheckIn">
+          <ScalarProperty Name="Gid" ColumnName="Gid" />
+          <ScalarProperty Name="Rno" ColumnName="Rno" />
+          <ScalarProperty Name="CheckinTime" ColumnName="CheckinTime" />
+          <ScalarProperty Name="CheckoutTime" ColumnName="CheckoutTime" />
+          <ScalarProperty Name="Cash" ColumnName="Cash" />
+          <ScalarProperty Name="CheID" ColumnName="CheID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customer">
+      <EntityTypeMapping TypeName="JustHotelPlusModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="Cname" ColumnName="Cname" />
+          <ScalarProperty Name="Csex" ColumnName="Csex" />
+          <ScalarProperty Name="Ctel" ColumnName="Ctel" />
+          <ScalarProperty Name="Cpwd" ColumnName="Cpwd" />
+          <ScalarProperty Name="Cpic" ColumnName="Cpic" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Guest">
+      <EntityTypeMapping TypeName="JustHotelPlusModel.Guest">
+        <MappingFragment StoreEntitySet="Guest">
+          <ScalarProperty Name="Gname" ColumnName="Gname" />
+          <ScalarProperty Name="Gsex" ColumnName="Gsex" />
+          <ScalarProperty Name="Gid" ColumnName="Gid" />
+          <ScalarProperty Name="Gtel" ColumnName="Gtel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoomInfo">
+      <EntityTypeMapping TypeName="JustHotelPlusModel.RoomInfo">
+        <MappingFragment StoreEntitySet="RoomInfo">
+          <ScalarProperty Name="Rtype" ColumnName="Rtype" />
+          <ScalarProperty Name="Rfloor" ColumnName="Rfloor" />
+          <ScalarProperty Name="Rlive" ColumnName="Rlive" />
+          <ScalarProperty Name="Rwindow" ColumnName="Rwindow" />
+          <ScalarProperty Name="Rcost" ColumnName="Rcost" />
+          <ScalarProperty Name="Rreservation" ColumnName="Rreservation" />
+          <ScalarProperty Name="Rpic" ColumnName="Rpic" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoomNum">
+      <EntityTypeMapping TypeName="JustHotelPlusModel.RoomNum">
+        <MappingFragment StoreEntitySet="RoomNum">
+          <ScalarProperty Name="Rno" ColumnName="Rno" />
+          <ScalarProperty Name="Rtype" ColumnName="Rtype" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BookView">
+      <EntityTypeMapping TypeName="JustHotelPlusModel.BookView">
+        <MappingFragment StoreEntitySet="BookView">
+          <ScalarProperty Name="Cname" ColumnName="Cname" />
+          <ScalarProperty Name="Ctel" ColumnName="Ctel" />
+          <ScalarProperty Name="CheckinTime" ColumnName="CheckinTime" />
+          <ScalarProperty Name="CheckoutTime" ColumnName="CheckoutTime" />
+          <ScalarProperty Name="Rtype" ColumnName="Rtype" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CheckInView">
+      <EntityTypeMapping TypeName="JustHotelPlusModel.CheckInView">
+        <MappingFragment StoreEntitySet="CheckInView">
+          <ScalarProperty Name="Gid" ColumnName="Gid" />
+          <ScalarProperty Name="Gname" ColumnName="Gname" />
+          <ScalarProperty Name="Gtel" ColumnName="Gtel" />
+          <ScalarProperty Name="Rno" ColumnName="Rno" />
+          <ScalarProperty Name="CheckinTime" ColumnName="CheckinTime" />
+          <ScalarProperty Name="CheckoutTime" ColumnName="CheckoutTime" />
+          <ScalarProperty Name="Cash" ColumnName="Cash" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustmerInfo">
+      <EntityTypeMapping TypeName="JustHotelPlusModel.CustmerInfo">
+        <MappingFragment StoreEntitySet="CustmerInfo">
+          <ScalarProperty Name="Cname" ColumnName="Cname" />
+          <ScalarProperty Name="Csex" ColumnName="Csex" />
+          <ScalarProperty Name="Ctel" ColumnName="Ctel" />
+          <ScalarProperty Name="Cpic" ColumnName="Cpic" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GuestInfo">
+      <EntityTypeMapping TypeName="JustHotelPlusModel.GuestInfo">
+        <MappingFragment StoreEntitySet="GuestInfo">
+          <ScalarProperty Name="Gname" ColumnName="Gname" />
+          <ScalarProperty Name="Gsex" ColumnName="Gsex" />
+          <ScalarProperty Name="Gid" ColumnName="Gid" />
+          <ScalarProperty Name="Gtel" ColumnName="Gtel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoomInfoView">
+      <EntityTypeMapping TypeName="JustHotelPlusModel.RoomInfoView">
+        <MappingFragment StoreEntitySet="RoomInfoView">
+          <ScalarProperty Name="Rno" ColumnName="Rno" />
+          <ScalarProperty Name="Rtype" ColumnName="Rtype" />
+          <ScalarProperty Name="Rfloor" ColumnName="Rfloor" />
+          <ScalarProperty Name="Rlive" ColumnName="Rlive" />
+          <ScalarProperty Name="Rwindow" ColumnName="Rwindow" />
+          <ScalarProperty Name="Rcost" ColumnName="Rcost" />
+          <ScalarProperty Name="Rreservation" ColumnName="Rreservation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoomTypeInfo">
+      <EntityTypeMapping TypeName="JustHotelPlusModel.RoomTypeInfo">
+        <MappingFragment StoreEntitySet="RoomTypeInfo">
+          <ScalarProperty Name="RoomTypeID" ColumnName="RoomTypeID" />
+          <ScalarProperty Name="Rtype" ColumnName="Rtype" />
+          <ScalarProperty Name="Rwindow" ColumnName="Rwindow" />
+          <ScalarProperty Name="Rcost" ColumnName="Rcost" />
+          <ScalarProperty Name="Rreservation" ColumnName="Rreservation" />
+          <ScalarProperty Name="Rpic" ColumnName="Rpic" />
+          <ScalarProperty Name="Rlive" ColumnName="Rlive" />
+          <ScalarProperty Name="Rfloor" ColumnName="Rfloor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

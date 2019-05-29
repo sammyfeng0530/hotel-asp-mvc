@@ -1,0 +1,54 @@
+﻿@model MvcHotel.Models.Admin
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="admin-left-my-info">
+        <div class="admin-portrait-img">
+            <img src="@Html.DisplayFor(model => model.Apic)" alt="头像" class="img-responsive">
+        </div>
+        <div class="admin-my-info-detail">
+            <h3>管理员</h3>
+            <section>
+                <label><i class="fas fa-user"></i>@Html.DisplayNameFor(model => model.Aname)：</label>
+                <div>
+                    @Html.EditorFor(model => model.Aname, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Aname, "", new { @class = "text-danger" })
+                </div>
+            </section>
+            <section>
+                <label><i class="fas fa-phone"></i>@Html.DisplayNameFor(model => model.Atel)：</label>
+                <div>
+                    @Html.EditorFor(model => model.Atel, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Atel, "", new { @class = "text-danger" })
+                </div>
+            </section>
+            <section>
+                <label><i class="fas fa-lock"></i>@Html.DisplayNameFor(model => model.Aid)：</label>
+                <div>
+                    @Html.EditorFor(model => model.Aid, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Aid, "", new { @class = "text-danger" })
+                </div>
+            </section>
+            <section>
+                <label><i class="fas fa-lock"></i>@Html.DisplayNameFor(model => model.Apwd)：</label>
+                <div>
+                    @Html.EditorFor(model => model.Apwd, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
+                    @Html.ValidationMessageFor(model => model.Apwd, "", new { @class = "text-danger" })
+                </div>
+            </section>
+            <section>
+                <label><i class="far fa-image"></i>@Html.DisplayNameFor(model => model.Apic)：</label>
+                <div>
+                    @Html.EditorFor(model => model.Apic, new { htmlAttributes = new { @class = "form-control"} })
+                    @Html.ValidationMessageFor(model => model.Apic, "", new { @class = "text-danger" })
+                </div>
+            </section>
+            <div class="btm-btn">
+                <button type="submit" class="btn btn-default">保存</button>
+                @Html.ActionLink("取消", "Index", null, new { @class = "btn btn-default" })
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+}

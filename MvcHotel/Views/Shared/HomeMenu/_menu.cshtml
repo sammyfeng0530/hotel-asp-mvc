@@ -1,0 +1,113 @@
+﻿
+<header class="nav menu ">
+    <div class="cd-auto-hide-header cd-primary-nav" id="cd-navigation">
+        <div class="menu-header">
+            <div class="title">
+                <p>Stay &nbsp; In &nbsp; This &nbsp; City</p>
+            </div>
+            <div class="menu-nav">
+                <span>@Html.ActionLink("设施服务", "Index", "Home")</span>
+                <span><a href="" id="prompt">房间展示</a></span>
+                <div class="menu-btn">
+                    <span>@Html.ActionLink("房间预定", "About", "Home")</span>
+                    <div class="menu-content">
+                        <ul>
+                            <li>
+                                <a href="">单人房</a>
+                            </li>
+                            <li>
+                                <a href="">标准房</a>
+                            </li>
+                            <li>
+                                <a href="">家庭房</a>
+                            </li>
+                            <li>
+                                <a href="">商务房</a>
+                            </li>
+                            <li>
+                                <a href="">套房</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="menu-btn">
+                    <span><a href="">联系我们</a></span>
+                    <div class="menu-content">
+                        <ul>
+                            <li><a href="">酒店地点</a></li>
+                            <li><a href="">联系方式</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="logo">
+            <img src="../../images/logo.png" width="80" />
+        </div>
+        <div class="search_box">
+            <form action="~/Home/About" method="get">
+                <input type="text" runat="server" name="findkey" placeholder="请输入需要的房型">
+                <input class="search_btn" type="submit" value="Search">
+            </form>
+        </div>
+        <div class="rightbutton">
+            <span class="login login-btn"><button>登录</button></span>
+        </div>
+    </div>
+
+</header>
+<div class="clearfix"></div>
+<nav class="cd-auto-display-header cd-secondary-nav">
+    <div class="menu-header">
+        <div class="menu-logo">
+            <img src="../../images/logo.png" width="50" />
+        </div>
+        <div class="menu-nav ">
+            <span><a href="">设施服务</a></span>
+            <span><a href="">房间展示</a></span>
+            <div class="menu-btn">
+                <span>@Html.ActionLink("房间预定", "About", "Home")</span>
+                <div class="menu-content">
+                    <ul>
+                        <li>
+                            <a href="">单人房</a>
+                        </li>
+                        <li>
+                            <a href="">标准房</a>
+                        </li>
+                        <li>
+                            <a href="">家庭房</a>
+                        </li>
+                        <li>
+                            <a href="">商务房</a>
+                        </li>
+                        <li>
+                            <a href="">套房</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="menu-btn">
+                <span><a href="">联系我们</a></span>
+                <div class="menu-content">
+                    <ul>
+                        <li><a href="">酒店地点</a></li>
+                        <li><a href="">联系方式</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="search_box">
+            <form action="~/Home/About" method="get">
+                <input type="text" runat="server" name="findkey" placeholder="请输入需要的房型">
+                <input class="search_btn" type="submit" value="Search">
+             </form>
+        </div>
+        <div class="rightbutton">
+            <span class="book"><button>订购</button></span>
+        </div>
+    </div>
+</nav>
+@*@{
+        Html.RenderPartial("HomeMenu/_popup");
+    }*@

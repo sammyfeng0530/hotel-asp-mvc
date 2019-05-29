@@ -1,0 +1,43 @@
+﻿@model MvcHotel.Models.Admin
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/AdminMenu/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Admin</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Aname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Aname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Atel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Atel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Apic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Apic)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

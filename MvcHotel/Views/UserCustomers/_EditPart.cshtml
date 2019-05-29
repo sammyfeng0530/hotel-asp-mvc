@@ -1,0 +1,50 @@
+﻿@model MvcHotel.Models.Customer
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="portrait-img">
+        <img src="@Html.DisplayFor(model => model.Cpic)" alt="头像">
+    </div>
+    <div class="my-info-detail">
+        <section>
+            <label><i class="fas fa-phone"></i>@Html.DisplayNameFor(model => model.Cname)：</label>
+            <div>
+                @Html.EditorFor(model => model.Cname)
+                @Html.ValidationMessageFor(model => model.Cname, "", new { @class = "text-danger" })
+            </div>
+        </section>
+        <section>
+            <label><i class="fab fa-odnoklassniki"></i>@Html.DisplayNameFor(model => model.Csex)：</label>
+            <div>
+                @Html.DropDownListFor(model => model.Csex, new SelectList(new[] { new { Value = "", Text = "--选择--" }, new { Value = "true", Text = "男" }, new { Value = "false", Text = "女" }, }, "Value", "Text"))
+                @Html.ValidationMessageFor(model => model.Csex, "", new { @class = "text-danger" })
+            </div>
+        </section>
+        <section>
+            <label><i class="fas fa-phone"></i>@Html.DisplayNameFor(model => model.Ctel)：</label>
+            <div>
+                @Html.EditorFor(model => model.Ctel)
+                @Html.ValidationMessageFor(model => model.Ctel, "", new { @class = "text-danger" })
+            </div>
+        </section>
+        <section>
+            <label><i class="fas fa-user"></i>@Html.DisplayNameFor(model => model.Cpic)：</label>
+            <div>
+                @Html.EditorFor(model => model.Cpic)
+                @Html.ValidationMessageFor(model => model.Cpic, "", new { @class = "text-danger" })
+            </div>
+        </section>
+        <section>
+            <label><i class="fas fa-key"></i>@Html.DisplayNameFor(model => model.Cpwd)：</label>
+            <div>
+                @Html.EditorFor(model => model.Cpwd, new { htmlAttributes = new {@type="password" } })
+                @Html.ValidationMessageFor(model => model.Cpwd, "", new { @class = "text-danger"})
+            </div>
+        </section>
+        <div class="btm-btn">
+            <button type="submit" class="btn btn-default">保存</button>
+            @Html.ActionLink("取消", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    </div>
+}

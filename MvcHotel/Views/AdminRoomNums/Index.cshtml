@@ -1,0 +1,122 @@
+﻿@*@model IEnumerable<MvcHotel.Models.RoomNum>*@
+@model PagedList.IPagedList<MvcHotel.Models.RoomNum>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "房间管理";
+    Layout = "~/Views/Shared/AdminMenu/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+<div class="admin-search-box row">
+    <div class="col-sm-2">
+        <button class="btn">@Html.ActionLink("新增房间", "Create")</button>
+    </div>
+    <div class="col-sm-2">
+        <button class="btn" type="submit">所有房间</button>
+    </div>
+    <div class="col-sm-4 rtype-filter">
+        <label>房间类型：</label>
+        @Html.DropDownList("Rtype", null, "--请选择--", htmlAttributes: new { @class = "form-control" })
+    </div>
+    <div class="col-sm-4">
+        <label>房间号：</label>
+        <div class="search-box-input">
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "" })
+            <input class="admin-search-box-btn" type="submit" value="Search" width="50" />
+        </div>
+    </div>
+    
+    <div class="clearfix"></div>
+</div>
+}
+<div id="room-num-tb">
+    @using (Html.BeginForm("MultDelete", "AdminRoomNums"))
+    {
+        <table class="tb admin-table" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="selectAll" /><i class="replace"></i>
+                            </label>
+                            <input type="submit" value="多选删除" class="btn" onclick="return confirm('确定要删除吗?')" />
+                        </th>
+                        <th>
+                            房间号
+                        </th>
+                        <th>
+                            房间类型
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="checkitem" value="@item.Rno"><i class="replace"></i>
+                            </label>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Rno)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RoomInfo.Rtype)
+                        </td>
+                        <td>
+                            @Html.ActionLink("编辑", "Edit", new { id = item.Rno }, new { @class = "far fa-edit" }) |
+                            @*@Html.ActionLink("详情", "Details", new { id = item.Bid }, new { @class = "far fa-trash-alt" }) |*@
+                            @Html.ActionLink("删除", "Delete", new { id = item.Rno }, new { onclick = "return confirm('确定删除吗？')", @class = "far fa-trash-alt" })
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+            @*<table class="table">
+                <tr>
+                    <th>
+                        <input type="checkbox" id="selectAll" />
+                        <input type="submit" value="多选删除" class="btn" onclick="return confirm('确定要删除吗?')" />
+                    </th>
+                    <th>
+                        房间号
+                    </th>
+                    <th>
+                        房间类型
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.CheckBox("checkitem", new { value = item.Rno })
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Rno)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RoomInfo.Rtype)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Rno }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Rno }) |
+                            @Html.ActionLink("删除", "Delete", new { id = item.Rno }, new { onclick = "return confirm('确定删除吗？')" })
+                        </td>
+                    </tr>
+                }
+
+            </table>*@
+        }
+    </div>
+
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Index",
+                                                             new { page, currentFilter = ViewBag.CurrentFilter }))
+

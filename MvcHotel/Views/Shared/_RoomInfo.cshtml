@@ -1,0 +1,51 @@
+﻿@model IEnumerable<MvcHotel.Models.RoomInfo>
+
+@foreach (var item in Model)
+{
+    @*<div class="vk-select-room-info-item-wrap col-md-6" style="padding:20px;">*@
+    <div class="vk-select-room-info-item">
+        <div class="vk-select-room-item-img ">
+            <img src="@Html.DisplayFor(modelItem => item.Rpic)" alt="" class="img-responsive" />
+        </div>
+        <div class="vk-select-room-item-info">
+            <h2>@item.Rtype</h2>
+            <div class="vk-select-room-item-body">
+                <ul>
+                    <li>
+                        <p><i class="fa fa-bed" aria-hidden="true"></i>楼层: <span>@Html.DisplayFor(modelItem => item.Rfloor)</span></p>
+                    </li>
+                    <li>
+                        <p>
+                            <i class="fa fa-binoculars" aria-hidden="true"></i>是否有窗: <span>@Html.DisplayTextFor(modelItem => item.Rwindow)</span>
+                        </p>
+                    </li>
+                    <li>
+                        <p><i class="fa fa-arrows-alt" aria-hidden="true"></i>是否可退: <span>@Html.DisplayTextFor(modelItem => item.Rwindow)</span></p>
+                    </li>
+                    <li>
+                        <p><i class="fa fa-users" aria-hidden="true"></i>最大容纳: <span>@Html.DisplayFor(modelItem => item.Rlive) 人</span></p>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="vk-select-room-item-footer">
+                <div class="vk-select-room-footer-left">
+                    <ul>
+                        <li>
+                            起始价:
+                        </li>
+                        <li>
+                            <p>@Html.DisplayFor(modelItem => item.Rcost) <span>晚</span></p>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="vk-select-room-footer-right">
+                    <h4><a href="#book-form-content" class="orderPrompt">订购</a></h4>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+}

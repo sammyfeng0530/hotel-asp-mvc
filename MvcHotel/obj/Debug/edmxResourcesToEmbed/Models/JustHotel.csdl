@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="JustHotelPluscModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="Aid" />
+    </Key>
+    <Property Name="Aid" Type="String" MaxLength="18" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Apwd" Type="String" MaxLength="18" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Aname" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Atel" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+    <Property Name="Apic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="Bid" />
+    </Key>
+    <Property Name="CheckinTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Ctel" Type="String" MaxLength="11" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="CheckoutTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Bid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RtypeID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_Book_Customer" FromRole="Book" ToRole="Customer" />
+    <NavigationProperty Name="RoomInfo" Relationship="Self.FK_Book_RoomInfo" FromRole="Book" ToRole="RoomInfo" />
+  </EntityType>
+  <EntityType Name="CheckIn">
+    <Key>
+      <PropertyRef Name="CheID" />
+    </Key>
+    <Property Name="Gid" Type="String" MaxLength="18" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Rno" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="CheckinTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CheckoutTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Cash" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="CheID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Guest" Relationship="Self.FK_CheckIn_Guest" FromRole="CheckIn" ToRole="Guest" />
+    <NavigationProperty Name="RoomNum" Relationship="Self.FK_CheckIn_RoomNum" FromRole="CheckIn" ToRole="RoomNum" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Ctel" />
+    </Key>
+    <Property Name="Cname" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Csex" Type="Boolean" />
+    <Property Name="Ctel" Type="String" MaxLength="11" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Cpwd" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Cpic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Book" Relationship="Self.FK_Book_Customer" FromRole="Customer" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="Guest">
+    <Key>
+      <PropertyRef Name="Gid" />
+    </Key>
+    <Property Name="Gname" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Gsex" Type="Boolean" />
+    <Property Name="Gid" Type="String" MaxLength="18" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Gtel" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CheckIn" Relationship="Self.FK_CheckIn_Guest" FromRole="Guest" ToRole="CheckIn" />
+  </EntityType>
+  <EntityType Name="RoomInfo">
+    <Key>
+      <PropertyRef Name="RtypeID" />
+    </Key>
+    <Property Name="Rtype" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Rfloor" Type="Int32" />
+    <Property Name="Rlive" Type="Int32" />
+    <Property Name="Rwindow" Type="Boolean" />
+    <Property Name="Rcost" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Rreservation" Type="Boolean" />
+    <Property Name="Rpic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RtypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Book" Relationship="Self.FK_Book_RoomInfo" FromRole="RoomInfo" ToRole="Book" />
+    <NavigationProperty Name="RoomNum" Relationship="Self.FK_RoomNum_RoomInfo" FromRole="RoomInfo" ToRole="RoomNum" />
+  </EntityType>
+  <EntityType Name="RoomNum">
+    <Key>
+      <PropertyRef Name="Rno" />
+    </Key>
+    <Property Name="Rno" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="RtypeID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CheckIn" Relationship="Self.FK_CheckIn_RoomNum" FromRole="RoomNum" ToRole="CheckIn" />
+    <NavigationProperty Name="RoomInfo" Relationship="Self.FK_RoomNum_RoomInfo" FromRole="RoomNum" ToRole="RoomInfo" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="BookView">
+    <Key>
+      <PropertyRef Name="Cname" />
+      <PropertyRef Name="Ctel" />
+      <PropertyRef Name="CheckinTime" />
+      <PropertyRef Name="CheckoutTime" />
+      <PropertyRef Name="Rtype" />
+    </Key>
+    <Property Name="Cname" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Ctel" Type="String" MaxLength="11" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="CheckinTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CheckoutTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Rtype" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CheckInView">
+    <Key>
+      <PropertyRef Name="Gid" />
+      <PropertyRef Name="Gname" />
+      <PropertyRef Name="Gtel" />
+      <PropertyRef Name="Rno" />
+      <PropertyRef Name="CheckinTime" />
+      <PropertyRef Name="CheckoutTime" />
+      <PropertyRef Name="Cash" />
+    </Key>
+    <Property Name="Gid" Type="String" MaxLength="18" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Gname" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Gtel" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Rno" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="CheckinTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CheckoutTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Cash" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CustmerInfo">
+    <Key>
+      <PropertyRef Name="Cname" />
+      <PropertyRef Name="Ctel" />
+    </Key>
+    <Property Name="Cname" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Csex" Type="Boolean" />
+    <Property Name="Ctel" Type="String" MaxLength="11" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Cpic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="GuestInfo">
+    <Key>
+      <PropertyRef Name="Gname" />
+      <PropertyRef Name="Gid" />
+      <PropertyRef Name="Gtel" />
+    </Key>
+    <Property Name="Gname" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Gsex" Type="Boolean" />
+    <Property Name="Gid" Type="String" MaxLength="17" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Gtel" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RoomInfoView">
+    <Key>
+      <PropertyRef Name="Rno" />
+      <PropertyRef Name="Rtype" />
+    </Key>
+    <Property Name="Rno" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Rtype" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Rfloor" Type="Int32" />
+    <Property Name="Rlive" Type="Int32" />
+    <Property Name="Rwindow" Type="Boolean" />
+    <Property Name="Rcost" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Rreservation" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="RoomTypeInfo">
+    <Key>
+      <PropertyRef Name="Rtype" />
+      <PropertyRef Name="RtypeID" />
+    </Key>
+    <Property Name="Rtype" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Rfloor" Type="Int32" />
+    <Property Name="Rlive" Type="Int32" />
+    <Property Name="Rwindow" Type="Boolean" />
+    <Property Name="Rcost" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Rreservation" Type="Boolean" />
+    <Property Name="Rpic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RtypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <Association Name="FK_Book_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Ctel" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="Ctel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Book_RoomInfo">
+    <End Role="RoomInfo" Type="Self.RoomInfo" Multiplicity="1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RoomInfo">
+        <PropertyRef Name="RtypeID" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="RtypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CheckIn_Guest">
+    <End Role="Guest" Type="Self.Guest" Multiplicity="1" />
+    <End Role="CheckIn" Type="Self.CheckIn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Guest">
+        <PropertyRef Name="Gid" />
+      </Principal>
+      <Dependent Role="CheckIn">
+        <PropertyRef Name="Gid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CheckIn_RoomNum">
+    <End Role="RoomNum" Type="Self.RoomNum" Multiplicity="1" />
+    <End Role="CheckIn" Type="Self.CheckIn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RoomNum">
+        <PropertyRef Name="Rno" />
+      </Principal>
+      <Dependent Role="CheckIn">
+        <PropertyRef Name="Rno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoomNum_RoomInfo">
+    <End Role="RoomInfo" Type="Self.RoomInfo" Multiplicity="1" />
+    <End Role="RoomNum" Type="Self.RoomNum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RoomInfo">
+        <PropertyRef Name="RtypeID" />
+      </Principal>
+      <Dependent Role="RoomNum">
+        <PropertyRef Name="RtypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="JustHotelPluscEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Admin" EntityType="Self.Admin" />
+    <EntitySet Name="Book" EntityType="Self.Book" />
+    <EntitySet Name="CheckIn" EntityType="Self.CheckIn" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" />
+    <EntitySet Name="Guest" EntityType="Self.Guest" />
+    <EntitySet Name="RoomInfo" EntityType="Self.RoomInfo" />
+    <EntitySet Name="RoomNum" EntityType="Self.RoomNum" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="BookView" EntityType="Self.BookView" />
+    <EntitySet Name="CheckInView" EntityType="Self.CheckInView" />
+    <EntitySet Name="CustmerInfo" EntityType="Self.CustmerInfo" />
+    <EntitySet Name="GuestInfo" EntityType="Self.GuestInfo" />
+    <EntitySet Name="RoomInfoView" EntityType="Self.RoomInfoView" />
+    <EntitySet Name="RoomTypeInfo" EntityType="Self.RoomTypeInfo" />
+    <AssociationSet Name="FK_Book_Customer" Association="Self.FK_Book_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Book" EntitySet="Book" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Book_RoomInfo" Association="Self.FK_Book_RoomInfo">
+      <End Role="RoomInfo" EntitySet="RoomInfo" />
+      <End Role="Book" EntitySet="Book" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CheckIn_Guest" Association="Self.FK_CheckIn_Guest">
+      <End Role="Guest" EntitySet="Guest" />
+      <End Role="CheckIn" EntitySet="CheckIn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CheckIn_RoomNum" Association="Self.FK_CheckIn_RoomNum">
+      <End Role="RoomNum" EntitySet="RoomNum" />
+      <End Role="CheckIn" EntitySet="CheckIn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoomNum_RoomInfo" Association="Self.FK_RoomNum_RoomInfo">
+      <End Role="RoomInfo" EntitySet="RoomInfo" />
+      <End Role="RoomNum" EntitySet="RoomNum" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,65 @@
+﻿@model MvcHotel.Models.Customer
+
+@{
+    ViewBag.Title = "我的用户信息";
+    Layout = "~/Views/Shared/LoginMenu/_Layout.cshtml";
+}
+
+<div class="myinfo-banner jumbotron">
+    <div class="banner-mask">
+        <div class="banner-title-wrap">
+            <h1>@ViewBag.Title</h1>
+            <h2>MY INFORMATION</h2>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="min-height:1000px">
+    <div class="col-md-3">
+        <div class="left-my-info">
+            <div class="portrait-img">
+                <img src="@Html.DisplayFor(model => model.Cpic)" alt="头像">
+            </div>
+            <div class="my-info-detail">
+                <h2>@Html.DisplayFor(model => model.Cname)</h2>
+                <section>
+                    <label><i class="fab fa-odnoklassniki"></i>@Html.DisplayNameFor(model => model.Csex)：</label>
+                    <div>@(Model.Csex ? "男" : "女")</div>
+                </section>
+                <section>
+                    <label><i class="fas fa-phone"></i>@Html.DisplayNameFor(model => model.Ctel)：</label>
+                    <div id="my-id">@Html.DisplayFor(model => model.Ctel)</div>
+                </section>
+                <button id="edit-my-info" class="btn btn-default btm-btn">编辑</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="right-my-order">
+            @{
+                Html.RenderAction("_myBooks", "UserBooks");
+            }
+        </div>
+    </div>
+</div>
+<script>
+    colHeight = document.documentElement.clientHeight;
+    $(".ser-banner").height(colHeight);
+    $(".banner-mask").height(colHeight);
+</script>
+
+<script>
+    $(document).ready(function () {
+        var aid=$("#my-id").html();
+        $("#edit-my-info").on("click", function() {
+            $.ajax({
+                url: "@Url.Action("_Editpart", "UserCustomers", new { id = Model.Ctel })",
+                type: "GET",
+                data: { id: aid }
+            })
+            .done(function(partialViewResult) {
+                $(".left-my-info").html(partialViewResult);
+            });
+        });
+    });
+</script>

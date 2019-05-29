@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1920, initial-scale=1.0">
+    <title>@ViewBag.Title - 我的 ASP.NET 应用程序</title>
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    @{
+        Html.RenderPartial("AdminMenu/_menu");
+    }
+    <div class="body-content" style="background:#000; padding-top:110px;">
+        <!-- left -->
+
+        <div class="option-left">
+            @{
+                Html.RenderAction("_Admin");
+            }
+            <div class="leftsidebar_box left__item">
+                <dl class="left-menu-item">
+                    <dt><i class="fas fa-shopping-cart"></i>订单管理<span class="fas fa-caret-right"></span></dt>
+                    <dd class="first_dd">@Html.ActionLink("用户管理", "Index", "AdminCustomers")</dd>
+                    <dd>@Html.ActionLink("订房管理", "Index", "AdminBooks")</dd>
+                </dl>
+
+                <dl class="left-menu-item">
+                    <dt><i class="fas fa-bed"></i>入住管理<span class="fas fa-caret-right"></span></dt>
+                    <dd class="first_dd">@Html.ActionLink("房客管理", "Index", "AdminGuests")</dd>
+                    <dd>@Html.ActionLink("登记入住", "Index", "AdminCheckIns")</dd>
+                </dl>
+
+                <dl class="left-menu-item">
+                    <dt><i class="fas fa-store-alt"></i>客房信息<span class="fas fa-caret-right"></span></dt>
+                    <dd class="first_dd">@Html.ActionLink("房型管理", "Index", "AdminRoomInfoes")</dd>
+                    <dd>@Html.ActionLink("房号管理", "Index", "AdminRoomNums")</dd>
+                </dl>
+            </div>
+        </div>
+        <div class="option-right">
+            <div class="inner">
+                @RenderBody()
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <!-- right -->
+
+
+    @{
+        Html.RenderPartial("_footer");
+    }
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        $(".leftsidebar_box dt").css({ "background-color": "#3992d0" });
+        $(".leftsidebar_box dt img").attr("src", "images/left/select_xl01.png");
+        $(function () {
+            $(".leftsidebar_box dd").hide();
+            $(".leftsidebar_box dt").click(function () {
+                $(".leftsidebar_box dt").css({ "background-color": "#3992d0" })
+                $(this).css({ "background-color": "#317eb4" });
+                $(this).parent().find('dd').removeClass("menu_chioce");
+                $(this).parent().find('span').toggleClass("fa-caret-right").toggleClass("fa-caret-down");
+                $(".menu_chioce").slideUp();
+                $(this).parent().find('dd').slideToggle();
+                $(this).parent().find('dd').addClass("menu_chioce");
+            });
+        })
+    </script>
+    <script src="~/Scripts/selectAll.js"></script>
+</body>
+
+</html>

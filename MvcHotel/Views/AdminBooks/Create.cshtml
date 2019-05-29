@@ -1,0 +1,110 @@
+﻿@model MvcHotel.Models.Book
+
+@{
+    ViewBag.Title = "新建订单";
+    Layout = "~/Views/Shared/AdminMenu/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    @Html.ActionLink("", "Index","",new { @class= "fas fa-arrow-alt-circle-left return-btn" })
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Book</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    <div class="form-group">
+@Html.LabelFor(model => model.Ctel, "电话号码", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @*@Html.DropDownList("Ctel", null, htmlAttributes: new { @class = "form-control" })*@
+            @Html.EditorFor(model => model.Ctel, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Ctel, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.CheckinTime, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="controls input-append date form_datetime" data-date="2018-05-17T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
+                <span class="add-on"><i class="icon-th"></i></span>
+                <input size="30" type="text" value="" readonly>
+                <span class="right-icon btn add-on">
+                    <span class="far fa-calendar-alt "></span>
+                </span>
+            </div>
+            @Html.EditorFor(model => model.CheckinTime, new { htmlAttributes = new { @id = "dtp_input1", @type = "hidden" } })
+            @*@Html.EditorFor(model => model.CheckinTime, new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.ValidationMessageFor(model => model.CheckinTime, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.CheckoutTime, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="controls input-append date form_datetime" data-date="2018-05-17T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input2">
+                <span class="add-on"><i class="icon-th"></i></span>
+                <input size="30" type="text" value="" readonly>
+                <span class="right-icon btn add-on">
+                    <span class="far fa-calendar-alt "></span>
+                </span>
+            </div>
+            @Html.EditorFor(model => model.CheckoutTime, new { htmlAttributes = new { @id = "dtp_input2", @type = "hidden" } })
+
+            @*@Html.EditorFor(model => model.CheckoutTime, new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.ValidationMessageFor(model => model.CheckoutTime, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.RtypeID, "房间类型", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("RtypeID", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.RtypeID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="创建" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+    <script type="text/javascript">
+        $('.form_datetime').datetimepicker({
+            format: 'yyyy-mm-dd H:mm:ss',
+            initialDate: new Date(),
+            language: 'zh-CN',
+            weekStart: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            forceParse: 0,
+            showMeridian: 1
+        });
+    </script>
+    <script type="text/javascript">
+    var dateRange1 = new pickerDateRange('date1', {
+        stopToday: false,
+        isTodayValid: true,
+        startDate: '2018-05-15',
+        endDate: '2018-05-16',
+        needCompare: false,
+        defaultText: ' 离开 ',
+        autoSubmit: false,
+        inputTrigger: 'input_trigger1',
+        theme: 'ta'
+    });
+    </script>

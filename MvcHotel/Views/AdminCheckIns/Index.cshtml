@@ -1,0 +1,195 @@
+﻿@*@model IEnumerable<MvcHotel.Models.CheckIn>*@
+@model PagedList.IPagedList<MvcHotel.Models.CheckIn>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "登记入住";
+    Layout = "~/Views/Shared/AdminMenu/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="admin-search-box row">
+    @using (Html.BeginForm())
+    {
+        <div class="col-sm-1">
+            <button class="btn">@Html.ActionLink("新增登记", "Create")</button>
+        </div>
+        <div class="col-sm-1">
+            <button class="btn" type="submit">所有登记</button>
+        </div>
+
+
+        <div class="col-sm-2">
+            <select name="findClass" class="admin-search-box-select">
+                <option>--选择条件--</option>
+                <option value="1">姓名</option>
+                <option value="2">房号</option>
+            </select>
+        </div>
+        <div class="search-box-input col-sm-3">
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "" })
+            <input class="admin-search-box-btn" type="submit" value="Search" width="50" />
+        </div>
+        <div class="time-filter col-sm-5">
+            <div class="time-filter-check col-sm-6">
+                @*calender here*@
+                <div class="controls input-append date form_date" data-date-format="dd MM yyyy" data-link-field="checkinTimeString" data-link-format="yyyy-mm-dd">
+                    <span class="add-on"><i class="icon-th"></i></span>
+                    <input size="20" type="text" value="" placeholder="入住时间" readonly>
+                    <span class="right-icon add-on">
+                        <span class="far fa-calendar-alt "></span>
+                    </span>
+                </div>
+                @Html.TextBox("checkinTimeString", ViewBag.CurrentFilter as string, new { @class = "", @type = "hidden" })
+                @*<input type="hidden" id="dtp_input3" value="" /><br />*@
+                @*calender here*@
+            </div>
+            <div class="time-filter-check col-sm-6">
+                @*calender here*@
+                <div class="controls input-append date form_date" data-date-format="dd MM yyyy" data-link-field="checkoutTimeString" data-link-format="yyyy-mm-dd">
+                    <span class="add-on"><i class="icon-th"></i></span>
+                    <input size="20" type="text" value="" placeholder="离店时间" readonly>
+                    <span class="right-icon add-on">
+                        <span class="far fa-calendar-alt "></span>
+                    </span>
+                </div>
+                @Html.TextBox("checkoutTimeString", ViewBag.CurrentFilter as string, new { @class = "", @type = "hidden" })
+                @*<input type="hidden" id="dtp_input4" value="" /><br />*@
+                @*calender here*@
+            </div>
+        </div>
+    }
+</div>
+@using (Html.BeginForm("MultDelete", "AdminCheckIns"))
+{
+    <table class="tb admin-table" cellspacing="0">
+        <thead>
+            <tr>
+                <th>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="selectAll" /><i class="replace"></i>
+                    </label>
+                    <input type="submit" value="多选删除" class="btn" onclick="return confirm('确定要删除吗?')" />
+                </th>
+                <th>
+                    入住时间
+                </th>
+                <th>
+                    退房时间
+                </th>
+                <th>
+                    押金
+                </th>
+                <th>
+                    姓名
+                </th>
+                <th>
+                    房间号
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="checkitem" value="@item.CheID"><i class="replace"></i>
+                    </label>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CheckinTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CheckoutTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cash)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Guest.Gname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rno)
+                </td>
+                <td>
+                    @Html.ActionLink("编辑", "Edit", new { id = item.CheID }, new { @class = "far fa-edit" }) |
+                    @*@Html.ActionLink("详情", "Details", new { id = item.Bid }, new { @class = "far fa-trash-alt" }) |*@
+                    @Html.ActionLink("删除", "Delete", new { id = item.CheID }, new { onclick = "return confirm('确定删除吗？')", @class = "far fa-trash-alt" })
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    @*<table class="table">
+        <tr>
+            <th>
+                <input type="checkbox" id="selectAll" />
+                <input type="submit" value="多选删除" class="btn" onclick="return confirm('确定要删除吗?')" />
+            </th>
+            <th>
+                入住时间
+            </th>
+            <th>
+                退房时间
+            </th>
+            <th>
+                押金
+            </th>
+            <th>
+                姓名
+            </th>
+            <th>
+                房间号
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.CheckBox("checkitem", new { value = item.CheID })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CheckinTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CheckoutTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cash)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Guest.Gname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rno)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.CheID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.CheID }) |
+                    @Html.ActionLink("删除", "Delete", new { id = item.CheID }, new { onclick = "return confirm('确定删除吗？')" })
+                </td>
+            </tr>
+        }
+
+    </table>*@
+}
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+                                 new { page, currentFilter = ViewBag.CurrentFilter }))
+<script type="text/javascript">
+    $('.form_date').datetimepicker({
+        format: 'yyyy-mm-dd',
+        initialDate: new Date(),
+        language: 'zh-CN',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0
+    });
+</script>
